@@ -1,0 +1,29 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>E-Mail</th>
+    <th>Nachricht</th>
+    <th>Aktionen</th>
+	</tr>
+
+		<% @req.each do |req| %>
+		<tr>
+			<td><a href="/admin/contact-requests/<%= req.id %>/show"><%= req.id %></a></td>
+			<td><%= req.name %></td>
+			<td><%= req.email %></td>
+      <td><%= req.message %></td>
+			<td>
+				<form action="/admin/contact-requests/<%= req.id %>/show">
+					<input type="submit" value="Anzeigen">
+				</form>
+				<form action="index.html" method="post">
+					<input type="submit" value="Löschen"><br>
+				</form>
+				<form action="/admin/contact-requests/<%= req.id %>/edit">
+					<input type="submit" value="Bearbeiten"><br>
+				</form>
+			</td>
+		</tr>
+		<% end %>
+</table>
