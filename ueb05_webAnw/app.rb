@@ -1,8 +1,3 @@
-# Stand:
-# Bearbeitenbutton einstellen edit_db_content und put ....
-# Löschenbutton implementieren
-
-require './datamapper'
 require 'sinatra/base'
 
 class MyApp < Sinatra::Base
@@ -39,77 +34,38 @@ end
 #    routes
 # \----------------------------------------------------------------------------/
 
-get "/" do
-  @title = 'Start'
-  erb :index
-end
-
-get '/index.html' do
-  @title = 'Start'
-  erb :index
-end
-
-get '/contact.html' do
-  @title = 'Kontakt'
-  erb :contact
-end
-
-get '/imprint.html' do
-  @title = 'Impressum'
-  erb :imprint
-end
-
-# Komplettansicht der DB - Inhalte
-get '/admin/contact-requests.html' do
-  @title = 'Kontaktanfragen'
-  @req = ContactRequest.all
-  erb :show_db_content
-end
-
-post '/admin/contact-requests/:id/edit' do |id|
-  @req = ContactRequest.get!(id)
-  erb :edit_db_content
-end
-
-get '/admin/contact-requests/:id/show' do |id|
-  req = ContactRequest.get!(id)
-  @name = req.name
-  @email = req.email
-  @message = req.message
-  erb :show_db_request
-end
-
-post '/admin/contact-requests/:id/show' do |id|
-  req = ContactRequest.get(id)
-  req.update(params[:req])
-  @name = req.name
-  @email = req.email
-  @message = req.message
-  erb :show_db_request
-end
-
-# Delete Area
-post '/admin/contact-requests/:id' do |id|
-  req = ContactRequest.get!(id)
-  req.destroy!
-  redirect "/admin/contact-requests.html"
+["/index.html", "/contact.html", "/imprint.html", "sendto.html", "/"].each do |path|
+  get path do
+    if request.path_info == "/index.html" or request.path_info =="/"
+      @title = 'Start'
+      erb :index
+    #elsif request.path_info =="/"
+    #  @title = 'Start'
+    #  erb :index
+    elsif request.path_info == "/contact.html"
+      @title = 'Kontakt'
+      erb :contact
+    elsif request.path_info == "/imprint.html"
+      @title = 'Impressum'
+      erb :imprint
+    end
+  end
 end
 
 # /----------------------------------------------------------------------------\
 #   send form
 # \----------------------------------------------------------------------------/
-
+# Die Inhalte des Formulars werden in die Variablen @name, @email und @message
+# gespeichert, wenn das Formular abgesendet wird.
+# contact.erb (Formular) => app.rb
+#   name = "name" => @name = params[:name}
+#   name = "email"  => @email = params[:email]
+#   name = "message" => @message = params[:message]
 post '/contact' do
-  req = ContactRequest.new(params[:req])
-  @name = req.name
-  @email = req.email
-  @message = req.message
-
-  if req.save
-    erb :fixContact
-  else
-    redirect '/contact.html'
-  end
+  @name = params[:name]
+  @email = params[:email]
+  @message = params[:message]
+  erb :fixContact
 end
 
 # admin-area

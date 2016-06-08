@@ -1,0 +1,26 @@
+<!-- Layout -->
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Alexander Lüdke" />
+    <meta name="keywords" content="Sinatra" />
+    <meta data-app-slug="624-splendid-baham" />
+    <title><%= @title %></title>
+  </head>
+  <body>
+    <img src="https://portal.htw-webtech.com/images/exercises/html/bazinga-logo.png" alt="Das Bazinga-Logo" />
+    <h1>Bazinga!</h1>
+
+    <a href="/index.html">Start</a>
+    <a href="/contact.html">Kontakt</a>
+    <a href="/imprint.html">Impressum</a>
+
+    <!-- input templates -->
+    <%= yield %>
+
+    <!-- count (ruby code) -->
+    <p>Das ist ihr <%= session[:counter] %>. Seitenaufruf.</p>
+    <p><a href="/admin.html">Admin</a></p>
+  </body>
+</html>

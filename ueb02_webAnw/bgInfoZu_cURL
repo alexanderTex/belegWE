@@ -1,0 +1,14 @@
+cURL:
+=====
+Stellt eine Möglichkeit dar Daten von oder zu einem Server zu übertragen.
+Hierbei werden die folgenden Protokolle unterstützt:
+DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3,
+POP3S,  RTMP, RTSP,  SCP,  SFTP,  SMTP, SMTPS, TELNET and TFTP
+
+curl http://htw-webtech-secret.herokuapp.com/429-erratic-dolphin/door_name
+Hierbei liefert der Befehl curl den Inhalt der Datei door_name.
+
+curl -X PUT http://htw-webtech-secret.herokuapp.com/doors/b32a3e -d ''
+-X  Es folgt eine HTTP Behl der übertragen wird, in diesem Fall
+PUT ("Aktualisieren") welcher die Datei "b32a3e" mit der Option
+-d und dem String '' erweitert.

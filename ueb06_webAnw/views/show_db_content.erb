@@ -17,10 +17,11 @@
 				<form action="/admin/contact-requests/<%= req.id %>/show">
 					<input type="submit" value="Anzeigen">
 				</form>
-				<form action="index.html" method="post">
+				<form action="/admin/contact-requests/<%= req.id %>" method="post">
+					<input type="hidden" name="_method" value="delete">
 					<input type="submit" value="Löschen"><br>
 				</form>
-				<form action="/admin/contact-requests/<%= req.id %>/edit">
+				<form action="/admin/contact-requests/<%= req.id %>/edit" method="post" >
 					<input type="submit" value="Bearbeiten"><br>
 				</form>
 			</td>
